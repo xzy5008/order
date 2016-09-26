@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE> New Document </TITLE>
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+ </HEAD>
+ <script type="text/javascript" src="jquery-1.6.4.js">
+	
+ </script>
+  <script type="text/javascript">
+  var obj;
+	var url = "/orders";
+    $.ajax({
+        type: "get",
+        url: url,
+//      data: "para="+para,  此处data可以为 a=1&b=2类型的字符串 或 json数据。
+        data: {"para":1},
+        cache: false,
+        async : false,
+        dataType: "json",
+        success: function (data ,textStatus, jqXHR)
+        {
+            if(data){
+              obj = data;
+                return true;
+            }else{
+                alert("不合法！错误信息如下："+data.errorMsg);
+                return false;
+            }
+        },
+        error:function (XMLHttpRequest, textStatus, errorThrown) {      
+            alert("请求失败！");
+        }
+     });
+ </script>
+<body>
+  <h3 > 表单对象属性过滤选择器.</h3>
+  <div id="ht">div</div>
+
+<script type="text/javascript">
+var str = JSON.stringify(obj);
+$("#ht").html(str);
+</script>
+
+
+</body>
+</HTML>
