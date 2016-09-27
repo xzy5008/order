@@ -1,4 +1,4 @@
-package com.hifox.config.security.pj;
+package com.hifox.security.pj;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,13 +6,14 @@ import java.util.List;
 
 
 /**
- * @Title: TRight.java
- * @Description: 组
- * @Date:2016年9月22日
+ * @Title: DGroup.java
+ * @Description: 组信息
+ * @Date:2016年9月27日
  * @author:xiezhongyong
  * @version 1.0
  */
 public class DGroup extends DModel{
+	private static final long serialVersionUID = -3934546713348479510L;
 	private String groupName;	//权限名
 	private String description;	//描述
 	private String ctime;		//创建时间

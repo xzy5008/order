@@ -1,40 +1,30 @@
-package com.hifox.config;
+package com.hifox.security.core;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.Filter;
-
 import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.embedded.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.filter.CharacterEncodingFilter;
-
 import com.hifox.config.filter.CustomSessionListener;
+import com.hifox.security.filter.CasForInvokeContextFilter;
+import com.hifox.security.util.CasConfig;
 
 /**
- * 
- * @Description:
- *
- * @Date:2016年9月13日
- * @author:xzy
+ * @Title: SecurityConfig.java
+ * @Description: cas 登录+验证拦截
+ * @Date:2016年9月27日
+ * @author:xiezhongyong
+ * @version 1.0
  */
 @Configuration
-public class WebConfig {
-
-	private static final String CAS_URL = "https://sso.ch.com/cas";
-	private static final String LOCAL_URL = "http://127.0.0.1";
+public class SecurityConfig {
 	
-	// 用于处理编码问题
-    @Bean
-    public Filter characterEncodingFilter() {
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
-        return characterEncodingFilter;
-    }
+	/**
+	 * 退出拦截器
+	 * @return
+	 */
 	@Bean
 	public FilterRegistrationBean casSingleSignOutFilter() {
 		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
@@ -55,8 +45,9 @@ public class WebConfig {
 		listener.setListener(new org.jasig.cas.client.session.SingleSignOutHttpSessionListener());
 		return listener;
 	}
+	
 	@Bean
-	public ServletListenerRegistrationBean<CustomSessionListener> mylistener() {
+	public ServletListenerRegistrationBean<CustomSessionListener> CustomListener() {
 		ServletListenerRegistrationBean<CustomSessionListener> listener = new ServletListenerRegistrationBean<CustomSessionListener>();
 		listener.setListener(new CustomSessionListener());
 		return listener;
@@ -68,8 +59,8 @@ public class WebConfig {
 		registrationBean.setName("casFilter");
 		org.jasig.cas.client.authentication.AuthenticationFilter casFilter = new org.jasig.cas.client.authentication.AuthenticationFilter();
 		registrationBean.setFilter(casFilter);
-		registrationBean.addInitParameter("casServerLoginUrl", CAS_URL);
-		registrationBean.addInitParameter("serverName", LOCAL_URL);
+		registrationBean.addInitParameter("casServerLoginUrl", CasConfig.CAS_URL);
+		registrationBean.addInitParameter("serverName", CasConfig.LOCAL_URL);
 		registrationBean.setOrder(6);
 		List<String> urlList = new ArrayList<String>();
 		urlList.add("/login");
@@ -84,8 +75,8 @@ public class WebConfig {
 		registrationBean.setName("casValidationFilter");
 		org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter casValidationFilter = new org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter();
 		registrationBean.setFilter(casValidationFilter);
-		registrationBean.addInitParameter("casServerUrlPrefix", CAS_URL);
-		registrationBean.addInitParameter("serverName", LOCAL_URL);
+		registrationBean.addInitParameter("casServerUrlPrefix", CasConfig.CAS_URL);
+		registrationBean.addInitParameter("serverName", CasConfig.LOCAL_URL);
 		registrationBean.addInitParameter("renew", "false");
 		registrationBean.addInitParameter("gateway", "false");
 		registrationBean.setOrder(7);
@@ -95,7 +86,6 @@ public class WebConfig {
 		
 		return registrationBean;
 	}
-	
 	
 	@Bean
 	public FilterRegistrationBean casHttpServletRequestWrapperFilter() {
@@ -130,7 +120,7 @@ public class WebConfig {
 	public FilterRegistrationBean casForInvokeContextFilter() {
 		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
 		registrationBean.setName("casForInvokeContextFilter");
-		com.hifox.config.filter.CasForInvokeContextFilter casForInvokeContextFilter = new com.hifox.config.filter.CasForInvokeContextFilter();
+		CasForInvokeContextFilter casForInvokeContextFilter = new CasForInvokeContextFilter();
 		registrationBean.setFilter(casForInvokeContextFilter);
 		registrationBean.setOrder(10);
 		List<String> urlList = new ArrayList<String>();

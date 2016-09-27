@@ -1,4 +1,4 @@
-package com.hifox.config.security.pj;
+package com.hifox.security.pj;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -6,25 +6,24 @@ import java.util.Map;
 
 /**
  * @Title: User.java
- * @Description: 用户信封装
- *
+ * @Description: 用户信息封装
  * @Date:2016年9月26日
  * @author:xiezhongyong
  * @version 1.0
  */
-public class User implements Serializable{
+public class CurrentUser implements Serializable{
 	
 	private static final long serialVersionUID = 4068530930059266464L;
 
-	public User() {
+	public CurrentUser() {
 	}
 
-	public User(String userName, String passWord) {
+	public CurrentUser(String userName, String passWord) {
 		this.userName = userName;
 		this.passWord = passWord;
 	}
 
-	public User(String userName, String passWord, String email, String phone) {
+	public CurrentUser(String userName, String passWord, String email, String phone) {
 		this.userName = userName;
 		this.passWord = passWord;
 		this.email = email;

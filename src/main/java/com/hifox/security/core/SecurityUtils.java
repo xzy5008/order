@@ -1,16 +1,9 @@
-package com.hifox.config.security;
-
+package com.hifox.security.core;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.jasig.cas.client.util.AssertionHolder;
-import org.jasig.cas.client.validation.Assertion;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.hifox.config.security.pj.DUserRight;
-import com.hifox.config.security.pj.User;
-
+import com.hifox.security.pj.CurrentUser;
 /**
  * @Title: SecurityUtils.java
  * @Description: 
@@ -20,16 +13,17 @@ import com.hifox.config.security.pj.User;
  * @version 1.0
  */
 public class SecurityUtils {
+	
 	/**
 	 * 获取当前登录用户
 	 * @return
 	 */
-    public static User getCurrentLogin() {
+    public static CurrentUser getCurrentLogin() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
     	Object object = request.getSession().getAttribute("user");
     	if(null != object)
-    		return (User)object;
+    		return (CurrentUser)object;
     	return null;
     }
 }

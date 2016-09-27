@@ -1,9 +1,7 @@
-package com.hifox.config.security.pj;
+package com.hifox.security.pj;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 /**
  * @Title: TRole.java
@@ -12,15 +10,14 @@ import java.util.List;
  * @author:xiezhongyong
  * @version 1.0
  */
-public class DRole extends DModel{
-
-	private String codeName;		//代码角色名 如：ROLE_USER
-	private String roleName;		//角色名称
-	private String description;		//描述
-	private String ctime;			//创建时间
+public class DRole extends DModel {
+	private static final long serialVersionUID = 1928509698001214393L;
+	private String codeName; // 代码角色名 如：ROLE_USER
+	private String roleName; // 角色名称
+	private String description; // 描述
+	private String ctime; // 创建时间
 	private List<DResource> resources = new ArrayList<DResource>();
 
-	
 	public DRole() {
 		super();
 	}
@@ -31,7 +28,6 @@ public class DRole extends DModel{
 		this.roleName = roleName;
 		this.description = description;
 	}
-
 
 	public String getCodeName() {
 		return codeName;
@@ -75,13 +71,8 @@ public class DRole extends DModel{
 
 	@Override
 	public String toString() {
-		return "DRole [id=" + getId() + ", codeName=" + codeName + ", roleName=" + roleName + ", description=" + description
-				+ ", ctime=" + ctime + ", resources=" + resources + "]";
+		return "DRole [id=" + getId() + ", codeName=" + codeName + ", roleName=" + roleName + ", description="
+				+ description + ", ctime=" + ctime + ", resources=" + resources + "]";
 	}
 
-	
-	
-
-	
-	
 }

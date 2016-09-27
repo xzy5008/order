@@ -24,13 +24,13 @@ public class GlobalExceptionHandler {
     public RESTJson handler(HttpServletRequest req , Exception e){
         LOG.error(e.getMessage());
         e.printStackTrace();
-        return RESTJson.fail(ResponseStatus.EXCEPTION,e.getMessage());
+        return null;
     }
     
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     @ResponseBody
     public RESTJson handlerRead(HttpServletRequest req , Exception e){
     	LOG.error(e.getMessage());
-    	return RESTJson.fail(ResponseStatus.EXCEPTION,"请求参数不合法");
+    	 return null;
     }
 }

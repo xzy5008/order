@@ -13,21 +13,12 @@ public class  ResponseStatus {
      */
     public static final int ERROR=1;
     /**
-     * 没有找到
+     * 没有权限
      */
-    public static final int NOT_FOUND=2;
+    public static final int NOTLOGGEDIN=1;
+    
     /**
-     * 表单验证错误
+     * 没有权限
      */
-    public static final int FIELD_ERROR =3;
-
-    /**
-     * 验证错误
-     */
-    public static final int AUTHENTICATION_EXCEPTION =4;
-
-    /**
-     * 异常错误
-     */
-    public static final int EXCEPTION =5;
+    public static final int PERMISSIONDENIED=2;
 }

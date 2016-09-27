@@ -1,4 +1,4 @@
-package com.hifox.config.security.pj;
+package com.hifox.security.pj;
 
 
 
@@ -10,14 +10,13 @@ package com.hifox.config.security.pj;
  * @version 1.0
  */
 public class DResource extends DModel{
-
+	private static final long serialVersionUID = 4084778811873909194L;
 	private String resourcetName;	//资源名
 	private String type;			//权限类型(POST/GET...)
 	private String url;				// 路径
 	private String description;		//描述
 	private String ctime;			//创建时间
 	private String sysKey;			//所属系统
-	
 	
 	public DResource() {
 		super();

@@ -1,9 +1,8 @@
-package com.hifox.config.security;
+package com.hifox.security.core;
 
 import java.io.Serializable;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
